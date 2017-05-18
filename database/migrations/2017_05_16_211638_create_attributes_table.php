@@ -15,12 +15,17 @@ class CreateAttributesTable extends Migration
     {
         Schema::create('attributes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
+            $table->string('code')->unique();
+            $table->string('name');
             $table->string('type');
             $table
                 ->boolean('enabled')
                 ->unsigned()
                 ->default('1');
+            $table
+                ->boolean('required')
+                ->unsigned()
+                ->default('0');
             $table->timestamps();
         });
     }
