@@ -17,11 +17,7 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('sku');
-            $table->integer('qty');
-            $table->boolean('enabled');
-            $table->float('price');
-            $table->float('special_price');
-            $table->float('unit_of_measure');
+            $table->string('unit_of_measure');
 
             $table->timestamps();
         });

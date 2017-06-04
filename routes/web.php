@@ -22,3 +22,17 @@ Route::post('/login', [
         'as' => 'login'
     ]
 );
+
+Route::get('/demo', [
+        'uses' => '\Agrofamily\Http\Controllers\HomeController@demo',
+        'as' => 'demo'
+    ]
+)->middleware('auth');
+
+
+//TODO remove this route
+Route::get('/make', [
+        'uses' => '\Agrofamily\Http\Controllers\HomeController@createUser',
+        'as' => 'make'
+    ]
+);

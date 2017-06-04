@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','opg_name'
     ];
 
     /**
@@ -26,4 +26,25 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getProducts(){
+        $products = $this
+            ->belongsToMany('Agrofamily\Product', 'products_users', 'user_id', 'product_id')
+            ->get();
+
+        /** @var \Agrofamily\Product $product */
+        foreach ($products as $product) {
+              $attributes = $product
+                  ->loadAttributes()
+                  ->wherePivot('user_id', $this->id)
+                  ->withPivot('value')
+                  ->get();
+              $product->setAttributes($attributes);
+        }
+        return $products;
+    }
 }
+
