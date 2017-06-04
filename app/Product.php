@@ -21,7 +21,9 @@ class Product extends Model
                 'Agrofamily\Attribute', 'attributes_products_users', 'product_id', 'attribute_id');
     }
 
-    public function setAttributes($attributes){
-        $this->attributes = $attributes;
+    public function setAdditionalAttributes($attributes){
+        foreach ($attributes as $attribute) {
+            $this->attributes['configurable_attributes'][] = $attribute;
+        }
     }
 }

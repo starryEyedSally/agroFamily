@@ -35,14 +35,15 @@ class User extends Authenticatable
             ->belongsToMany('Agrofamily\Product', 'products_users', 'user_id', 'product_id')
             ->get();
 
-        /** @var \Agrofamily\Product $product */
-        foreach ($products as $product) {
-              $attributes = $product
+        foreach ($products as $product)
+        {
+            /** @var \Agrofamily\Product $product */
+            $attributes = $product
                   ->loadAttributes()
                   ->wherePivot('user_id', $this->id)
                   ->withPivot('value')
                   ->get();
-              $product->setAttributes($attributes);
+              $product->setAdditionalAttributes($attributes);
         }
         return $products;
     }

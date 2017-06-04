@@ -25,10 +25,11 @@ class HomeController extends Controller
     {
         /** @var User $user */
         $user = Auth::user();
-
         $products = $user->getProducts();
 
-        //pass the products to the view
+
+
+        //pass the products and the user to the view
         return view('demo', [
             'products' => $products, 'user' => $user
         ]);
